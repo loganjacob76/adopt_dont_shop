@@ -1,5 +1,5 @@
 class Applicant < ApplicationRecord
-    has_many :adoption_applications
+    has_many :adoption_applications, dependent: :destroy
     has_many :pets, through: :adoption_applications
 
     validates :name, presence: true, uniqueness: true
