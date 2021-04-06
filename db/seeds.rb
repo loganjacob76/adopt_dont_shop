@@ -8,9 +8,9 @@
 shelter1 = Shelter.create!(foster_program: true, name: 'Paws of Life', city: 'Denver', rank: 3)
 shelter2 = Shelter.create!(foster_program: false, name: 'Pets R Us', city: 'Tampa', rank: 9)
 
-pet1 = shelter1.pets.create!(adoptable: true, age: 1, breed: 'dog', name: 'Star')
-pet2 = shelter1.pets.create!(adoptable: false, age: 4, breed: 'dog', name: 'Boo')
-pet3 = shelter2.pets.create!(adoptable: true, age: 2, breed: 'dog', name: 'Zeke')
+pet1 = shelter1.pets.create!(adoptable: true, age: 1, breed: 'Labrador', name: 'Star')
+pet2 = shelter1.pets.create!(adoptable: false, age: 4, breed: 'Mutt', name: 'Boo')
+pet3 = shelter2.pets.create!(adoptable: true, age: 2, breed: 'Bulldog', name: 'Zeke')
 
 vet_office1 = VeterinaryOffice.create!(boarding_services: false, max_patient_capacity: 8, name: 'Fur Clinic')
 vet_office2 = VeterinaryOffice.create!(boarding_services: true, max_patient_capacity: 20, name: 'Pet Doctors')
