@@ -1,0 +1,5 @@
+<h1>All Applicants</h1>
+
+<% @applicants.each do |applicant| %>
+    <p><%= link_to "#{applicant.name}", "/applicants/#{applicant.id}" %></p>
+<% end %>
