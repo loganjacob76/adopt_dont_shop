@@ -5,3 +5,21 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+shelter1 = Shelter.create!(foster_program: true, name: 'Paws of Life', city: 'Denver', rank: 3)
+shelter2 = Shelter.create!(foster_program: false, name: 'Pets R Us', city: 'Tampa', rank: 9)
+
+pet1 = shelter1.pets.create!(adoptable: true, age: 1, breed: 'dog', name: 'Star')
+pet2 = shelter1.pets.create!(adoptable: false, age: 4, breed: 'dog', name: 'Boo')
+pet3 = shelter2.pets.create!(adoptable: true, age: 2, breed: 'dog', name: 'Zeke')
+
+vet_office1 = VeterinaryOffice.create!(boarding_services: false, max_patient_capacity: 8, name: 'Fur Clinic')
+vet_office2 = VeterinaryOffice.create!(boarding_services: true, max_patient_capacity: 20, name: 'Pet Doctors')
+
+vet1 = vet_office1.veterinarians.create!(on_call: true, review_rating: 4, name: 'Joe Schmoe')
+vet2 = vet_office2.veterinarians.create!(on_call: false, review_rating: 5, name: 'Jane Schmoe')
+
+john = Applicant.create!(name: 'John Doe', street: '1234 Example Dr.', city: 'Denver', state: 'CO', zip: 12345)
+jane = Applicant.create!(name: 'Jane Doe', street: '5678 Fake Ave.', city: 'Tampa', state: 'FL', zip: 67890)
+
+AdoptionApplication.create!(applicant_id: john.id, pet_id: pet1.id)
+AdoptionApplication.create!(applicant_id: jane.id, pet_id: pet3.id)
