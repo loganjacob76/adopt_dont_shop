@@ -3,6 +3,7 @@ class CreateAdoptionApplications < ActiveRecord::Migration[5.2]
     create_table :adoption_applications do |t|
       t.references :applicant, foreign_key: true
       t.references :pet, foreign_key: true
+      t.string :application_status, default: 'N/A'
     end
   end
 end
