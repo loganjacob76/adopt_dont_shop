@@ -4,6 +4,6 @@ class ApplicantsController < ApplicationController
     end
 
     def show
-        binding.pry
+        @applicant = Applicant.find(params[:id])
     end
 end
