@@ -24,7 +24,10 @@
             <%= f.submit 'Submit' %>
         <% end %>
 
-        <%= @pet.name if @pet %>
+        <% if @pet %>
+            <%= @pet.name %>
+            <%= button_to 'Adopt this Pet', "/applicants/#{@applicant.id}", method: :patch, params: {pet_id: @pet.id} %>
+        <% end %>
     </div>
 <% end %>
 
