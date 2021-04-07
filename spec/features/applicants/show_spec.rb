@@ -55,5 +55,17 @@ RSpec.describe 'applicants show page' do
             expect(page).to_not have_content(@pet3.name)
             expect(page).to have_content("Pet with name 'Pete Barker' not found.")
         end
+
+        it 'has button to add pet' do
+            visit "/applicants/#{@john.id}"
+
+            fill_in :name, with: 'Peter Barker'
+            click_button 'Submit'
+
+            click_button 'Adopt this Pet'
+
+            expect(current_path).to eq("/applicants/#{@john.id}")
+            expect(page).to have_link(href: "/pets/#{@pet3.id}")
+        end
     end
 end
