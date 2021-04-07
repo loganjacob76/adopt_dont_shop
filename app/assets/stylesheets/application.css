@@ -20,3 +20,7 @@ section p {
 p.error {
     color:red;
 }
+
+h3 {
+    display:inline;
+}

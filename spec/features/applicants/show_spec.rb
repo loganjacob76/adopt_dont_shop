@@ -44,5 +44,16 @@ RSpec.describe 'applicants show page' do
             expect(current_path).to eq("/applicants/#{@john.id}")
             expect(page).to have_content(@pet3.name)
         end
+
+        it 'returns flash error if no pets match search' do
+            visit "/applicants/#{@john.id}"
+
+            fill_in :name, with: 'Pete Barker'
+            click_button 'Submit'
+
+            expect(current_path).to eq("/applicants/#{@john.id}")
+            expect(page).to_not have_content(@pet3.name)
+            expect(page).to have_content("Pet with name 'Pete Barker' not found.")
+        end
     end
 end

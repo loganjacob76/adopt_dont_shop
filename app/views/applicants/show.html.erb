@@ -1,18 +1,31 @@
 <h1><%= @applicant.name %></h1>
 
-<p><h3 style='display:inline;'>Address:</h3><br>
+<p><h3>Address:</h3><br>
             <%= @applicant.street %> <br>
             <%= @applicant.city %>, <%= @applicant.state %>, <%= @applicant.zip %>
 </p>
 
-<p><h3 style='display:inline;'>Personal Statement:</h3><br>
+<p><h3>Personal Statement:</h3><br>
     <%= @applicant.personal_statement %>
 </p>
 
-<p><h3 style='display:inline;'>Desired Pets:</h3><br>
+<p><h3>Desired Pets:</h3><br>
     <% @applicant.pets.each do |pet| %>
         <%= link_to pet.name, "/pets/#{pet.id}" %>
     <% end %>
 </p>
+
+<% if @applicant.status == 'In Progress' %>
+    <div>
+        <h3>Add a Pet to this Application</h3>
+        <%= form_with url: "/applicants/#{@applicant.id}", method: :get do |f| %>
+            <%= f.label :pet_name %>
+            <%= f.text_field :pet_name, required: true %>
+            <%= f.submit 'Submit' %>
+        <% end %>
+
+        <%= @pet.name if @pet %>
+    </div>
+<% end %>
 
 <p>Application Status: <%= @applicant.status %></p>
