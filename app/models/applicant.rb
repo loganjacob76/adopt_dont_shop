@@ -5,6 +5,6 @@ class Applicant < ApplicationRecord
     validates :name, presence: true, uniqueness: true
     validates :street, presence: true
     validates :city, presence: true 
-    validates :state, presence: true, length: {maximum: 2}
-    validates :zip, numericality: true 
+    validates :state, presence: true, length: {is: 2}
+    validates :zip, numericality: true
 end
