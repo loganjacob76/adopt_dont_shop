@@ -27,8 +27,11 @@ class ApplicantsController < ApplicationController
     end
 
     def add
-        AdoptionApplication.create!(applicant_id: params[:id], pet_id: params[:pet_id])
-        redirect_to "/applicants/#{params[:id]}"
+        applicant = Applicant.find(params[:id])
+        pet = Pet.find(params[:pet_id])
+        AdoptionApplication.create!(applicant: applicant, pet: pet)
+
+        redirect_to "/applicants/#{applicant.id}"
     end
 
     private
