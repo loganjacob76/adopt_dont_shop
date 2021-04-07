@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2021_04_05_050842) do
   create_table "adoption_applications", force: :cascade do |t|
     t.bigint "applicant_id"
     t.bigint "pet_id"
+    t.string "application_status", default: "N/A"
     t.index ["applicant_id"], name: "index_adoption_applications_on_applicant_id"
     t.index ["pet_id"], name: "index_adoption_applications_on_pet_id"
   end

@@ -22,6 +22,9 @@
       <p><%= link_to "Veterinary Offices", "/veterinary_offices" %></p>
       <p><%= link_to "Applicants", '/applicants' %></p>
     </section>
+    <% flash.each do |key, value| %>
+      <p class=<%= key %>><%= value %></p>
+    <% end %>
     <%= yield %>
   </body>
 </html>
