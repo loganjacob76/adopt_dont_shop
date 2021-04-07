@@ -5,6 +5,12 @@ class ApplicantsController < ApplicationController
 
     def show
         @applicant = Applicant.find(params[:id])
+        
+        if params[:pet_name]
+            @pet = Pet.find_by(name: params[:pet_name]) if params[:pet_name]
+            
+            flash[:error] = "Pet with name '#{params[:pet_name]}' not found." if @pet.nil?
+        end
     end
 
     def new
@@ -18,6 +24,10 @@ class ApplicantsController < ApplicationController
             flash[:error] = applicant.errors.full_messages.to_sentence
             render :new
         end
+    end
+
+    def add
+        binding.pry
     end
 
     private

@@ -6,6 +6,7 @@ RSpec.describe 'applicants show page' do
         @shelter1 = Shelter.create!(foster_program: true, name: 'Paws of Life', city: 'Denver', rank: 3)
         @pet1 = @shelter1.pets.create!(adoptable: true, age: 1, breed: 'Labrador', name: 'Star')
         @pet2 = @shelter1.pets.create!(adoptable: true, age: 4, breed: 'Mutt', name: 'Boo')
+        @pet3 = @shelter1.pets.create!(adoptable: true, age: 6, breed: 'Border Collie', name: 'Peter Barker')
 
         AdoptionApplication.create!(applicant_id: @john.id, pet_id: @pet1.id)
         AdoptionApplication.create!(applicant_id: @john.id, pet_id: @pet2.id)
@@ -31,5 +32,28 @@ RSpec.describe 'applicants show page' do
 
         expect(page).to have_link(href: "/pets/#{@pet1.id}")
         expect(page).to have_link(href: "/pets/#{@pet2.id}")
+    end
+
+    describe 'when application is not yet submitted you can add pets by name' do
+        it 'search for pet by name' do
+            visit "/applicants/#{@john.id}"
+
+            fill_in :name, with: 'Peter Barker'
+            click_button 'Submit'
+
+            expect(current_path).to eq("/applicants/#{@john.id}")
+            expect(page).to have_content(@pet3.name)
+        end
+
+        it 'returns flash error if no pets match search' do
+            visit "/applicants/#{@john.id}"
+
+            fill_in :name, with: 'Pete Barker'
+            click_button 'Submit'
+
+            expect(current_path).to eq("/applicants/#{@john.id}")
+            expect(page).to_not have_content(@pet3.name)
+            expect(page).to have_content("Pet with name 'Pete Barker' not found.")
+        end
     end
 end
