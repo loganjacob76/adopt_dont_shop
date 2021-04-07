@@ -11,7 +11,7 @@
 
 <p><h3>Desired Pets:</h3><br>
     <% @applicant.pets.each do |pet| %>
-        <%= link_to pet.name, "/pets/#{pet.id}" %>
+        <%= link_to pet.name, "/pets/#{pet.id}" %> <br>
     <% end %>
 </p>
 

@@ -27,7 +27,8 @@ class ApplicantsController < ApplicationController
     end
 
     def add
-        binding.pry
+        AdoptionApplication.create!(applicant_id: params[:id], pet_id: params[:pet_id])
+        redirect_to "/applicants/#{params[:id]}"
     end
 
     private
