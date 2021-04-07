@@ -11,7 +11,7 @@
 
 <p><h3>Desired Pets:</h3><br>
     <% @applicant.pets.each do |pet| %>
-        <%= link_to pet.name, "/pets/#{pet.id}" %>
+        <%= link_to pet.name, "/pets/#{pet.id}" %> <br>
     <% end %>
 </p>
 
@@ -24,7 +24,10 @@
             <%= f.submit 'Submit' %>
         <% end %>
 
-        <%= @pet.name if @pet %>
+        <% if @pet %>
+            <%= @pet.name %>
+            <%= button_to 'Adopt this Pet', "/applicants/#{@applicant.id}", method: :patch, params: {pet_id: @pet.id} %>
+        <% end %>
     </div>
 <% end %>
 
