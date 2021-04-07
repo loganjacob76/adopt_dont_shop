@@ -16,3 +16,7 @@
 section p {
     display:inline;
 }
+
+p.error {
+    color:red;
+}
