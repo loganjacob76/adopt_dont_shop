@@ -15,12 +15,12 @@
             <%= link_to pet.name, "/pets/#{pet.id}" %>
             <%= render partial: "button",  locals: {
                 path: "/admin/applicants/#{@applicant.id}", 
-                method: :patch, text: 'Approve Application', 
+                text: 'Approve Application', 
                 params: {application_status: 'Approved'} 
                 } %>
             <%= render partial: "button",  locals: {
                 path: "/admin/applicants/#{@applicant.id}", 
-                method: :patch, text: 'Reject Application', 
+                text: 'Reject Application', 
                 params: {application_status: 'Rejected'} 
                 } %>
         </div>
