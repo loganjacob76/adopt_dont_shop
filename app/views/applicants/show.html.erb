@@ -1,11 +1,11 @@
 <h1><%= @applicant.name %></h1>
 
-<p><h3>Address:</h3><br>
+<div id='address'><h3>Address:</h3><br>
             <%= @applicant.street %> <br>
             <%= @applicant.city %>, <%= @applicant.state %>, <%= @applicant.zip %>
-</p>
+</div>
 
-<p><h3>Personal Statement:</h3><br>
+<p id='address'><h3>Personal Statement:</h3><br>
     <%= @applicant.personal_statement %>
 </p>
 
@@ -31,4 +31,4 @@
     </div>
 <% end %>
 
-<p>Application Status: <%= @applicant.status %></p>
+<p id='status'>Application Status: <%= @applicant.status %></p> <br>
