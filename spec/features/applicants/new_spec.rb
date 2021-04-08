@@ -26,6 +26,18 @@ RSpec.describe 'new application form' do
                 expect(page).to have_content(henry.zip)
                 expect(page).to have_content('In Progress')
             end
+
+            it 'gives flash error message if it fails to create new applicant' do
+                visit '/pets'
+
+                click_link 'Start An Application'
+                expect(current_path).to eq('/applicants/new')
+                
+                click_on 'Submit'
+
+                expect(current_path).to eq('/applicants')
+                expect(page).to have_content("Name can't be blank, Street can't be blank, City can't be blank, State can't be blank, State is the wrong length (should be 2 characters), Zip is not a number")
+            end
         end
     end
 end

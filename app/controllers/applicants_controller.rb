@@ -26,7 +26,7 @@ class ApplicantsController < ApplicationController
         if applicant.save
             redirect_to "/applicants/#{applicant.id}"
         else
-            flash[:error] = applicant.errors.full_messages.to_sentence
+            flash[:error] = error_message(applicant.errors) #.full_messages.to_sentence
             render :new
         end
     end
