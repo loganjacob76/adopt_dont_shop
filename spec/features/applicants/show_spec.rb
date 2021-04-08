@@ -88,17 +88,15 @@ RSpec.describe 'applicants show page' do
             expect(page).to have_button('Submit Application')
         end
 
-        it 'Once it is submitted it shows all desired pets and no more can be added' do
-            visit "/applicants/#{@jane.id}"
+        it 'once it is submitted it shows all desired pets and no more can be added' do
+            visit "/applicants/#{@john.id}"
 
-            fill_in :name, with: 'Peter Barker'
-            click_button 'Submit'
-
-            click_button 'Adopt this Pet'
             click_button 'Submit Application'
 
-            expect(current_path.to eq("/applicants/#{@jane.id}")
-            expect(page).to have_content(@pet3.name)
+            expect(current_path).to eq("/applicants/#{@john.id}")
+            expect(page).to have_content(@pet1.name)
+            expect(page).to have_content(@pet2.name)
+            expect(page).to_not have_button('Submit Application')
             within '#status' do
                 expect(page).to have_content('Application Status: Pending')
             end
