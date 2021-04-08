@@ -41,4 +41,21 @@ RSpec.describe 'admin applicant show page' do
             expect(page).to have_content('Status: Approved')
         end
     end
+
+    it 'can reject application' do
+        visit "/admin/applicants/#{@john.id}"
+
+        within 'div#Star' do
+            click_button 'Reject Application'
+        end
+        
+        expect(current_path).to eq("/admin/applicants/#{@john.id}")
+
+        within 'div#Star' do
+            expect(page).to_not have_button('Approve Application')
+            expect(page).to_not have_button('Reject Application')
+
+            expect(page).to have_content('Status: Rejected')
+        end
+    end
 end
