@@ -34,6 +34,13 @@ class ApplicantsController < ApplicationController
         redirect_to "/applicants/#{applicant.id}"
     end
 
+    def submit
+        applicant = Applicant.find(params[:id])
+        applicant.update!(status: 'Pending')
+
+        redirect_to "/applicants/#{applicant.id}"
+    end
+
     private
         def applicant_params
             params.permit(:name, :street, :city, :state, :zip)
