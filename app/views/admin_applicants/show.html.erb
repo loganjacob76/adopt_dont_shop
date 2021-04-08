@@ -1,0 +1,19 @@
+<h1><%= @applicant.name %></h1>
+
+<div id='address'><h3>Address:</h3><br>
+            <%= @applicant.street %> <br>
+            <%= @applicant.city %>, <%= @applicant.state %>, <%= @applicant.zip %>
+</div>
+
+<p><h3>Personal Statement:</h3><br>
+    <%= @applicant.personal_statement %>
+</p>
+
+<p><h3>Desired Pets:</h3><br>
+    <% @applicant.pets.each do |pet| %>
+    <% binding.pry %>
+        <%= link_to pet.name, "/pets/#{pet.id}" %> <br>
+    <% end %>
+</p>
+
+<p id='status'>Application Status: <%= @applicant.status %></p> 

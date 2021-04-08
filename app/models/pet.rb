@@ -12,4 +12,9 @@ class Pet < ApplicationRecord
   def self.adoptable
     where(adoptable: true)
   end
+
+  def application_status(applicant)
+    adoption_applications.where(applicant_id: applicant.id)
+    .first.application_status
+  end
 end
