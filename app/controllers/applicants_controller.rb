@@ -7,9 +7,14 @@ class ApplicantsController < ApplicationController
         @applicant = Applicant.find(params[:id])
         
         if params[:pet_name]
-            @pet = Pet.find_by(name: params[:pet_name]) if params[:pet_name]
+            @pets = []
+            potential_pets = Pet.search(params[:pet_name]) if params[:pet_name]
             
-            flash[:error] = "Pet with name '#{params[:pet_name]}' not found." if @pet.nil?
+            potential_pets.each do |pet|
+                @pets << pet if !@applicant.pets.include?(pet)
+            end
+
+            flash[:error] = "New pet with name '#{params[:pet_name]}' not found." if @pets == []
         end
     end
 
@@ -21,14 +26,24 @@ class ApplicantsController < ApplicationController
         if applicant.save
             redirect_to "/applicants/#{applicant.id}"
         else
-            flash[:error] = applicant.errors.full_messages.to_sentence
+            flash[:error] = error_message(applicant.errors) #.full_messages.to_sentence
             render :new
         end
     end
 
     def add
-        AdoptionApplication.create!(applicant_id: params[:id], pet_id: params[:pet_id])
-        redirect_to "/applicants/#{params[:id]}"
+        applicant = Applicant.find(params[:id])
+        pet = Pet.find(params[:pet_id])
+        AdoptionApplication.create!(applicant: applicant, pet: pet)
+
+        redirect_to "/applicants/#{applicant.id}"
+    end
+
+    def submit
+        applicant = Applicant.find(params[:id])
+        applicant.update!(status: 'Pending')
+
+        redirect_to "/applicants/#{applicant.id}"
     end
 
     private

@@ -1,10 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Applicant do
-    before :each do
-        @john.create!(name: 'John Doe', street: '1234 Example Dr.', city: 'Denver', state: 'CO', zip: 12345)
-    end
-    
     describe 'attributes' do
         it { should have_many :pets }
         it { should have_many :adoption_applications }
