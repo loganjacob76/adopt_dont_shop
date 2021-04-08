@@ -11,8 +11,19 @@
 
 <p><h3>Desired Pets:</h3><br>
     <% @applicant.pets.each do |pet| %>
-    <% binding.pry %>
-        <%= link_to pet.name, "/pets/#{pet.id}" %> <br>
+        <div id="<%= pet.name %>">
+            <%= link_to pet.name, "/pets/#{pet.id}" %>
+            <%= render partial: "button",  locals: {
+                path: "/admin/applicants/#{@applicant.id}", 
+                method: :patch, text: 'Approve Application', 
+                params: {application_status: 'Approved'} 
+                } %>
+            <%= render partial: "button",  locals: {
+                path: "/admin/applicants/#{@applicant.id}", 
+                method: :patch, text: 'Reject Application', 
+                params: {application_status: 'Rejected'} 
+                } %>
+        </div>
     <% end %>
 </p>
 
