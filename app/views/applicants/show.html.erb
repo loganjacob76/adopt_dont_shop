@@ -18,11 +18,7 @@
 <% if @applicant.status == 'In Progress' %>
     <div>
         <h3>Add a Pet to this Application</h3>
-        <%= form_with url: "/applicants/#{@applicant.id}", method: :get do |f| %>
-            <%= f.label :pet_name %>
-            <%= f.text_field :pet_name, required: true %>
-            <%= f.submit 'Submit' %>
-        <% end %>
+        <%= render partial: "form", locals: {path: "/applicants/#{@applicant.id}", method: :get, param: :pet_name} %>
         <div id="potential_pets">
             <% if @pets %>
                 <% @pets.each do |pet| %>
