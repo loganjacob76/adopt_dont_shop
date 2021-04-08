@@ -7,7 +7,7 @@ RSpec.describe 'admin shelter index' do
     end
 
     it 'lists all shelters in reverse alphabetical order' do
-        visit '/admins/shelters'
+        visit '/admin/shelters'
 
         expect(page).to have_content(@shelter1.name)
         expect(page).to have_content(@shelter2.name)
