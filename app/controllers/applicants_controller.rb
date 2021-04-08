@@ -8,7 +8,7 @@ class ApplicantsController < ApplicationController
         
         if params[:pet_name]
             @pets = []
-            potential_pets = Pet.search(params[:pet_name]) if params[:pet_name]
+            potential_pets = Pet.search(params[:pet_name])
             
             potential_pets.each do |pet|
                 @pets << pet if !@applicant.pets.include?(pet)
@@ -26,7 +26,7 @@ class ApplicantsController < ApplicationController
         if applicant.save
             redirect_to "/applicants/#{applicant.id}"
         else
-            flash[:error] = error_message(applicant.errors) #.full_messages.to_sentence
+            flash[:error] = error_message(applicant.errors)
             render :new
         end
     end
