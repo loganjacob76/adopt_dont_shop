@@ -1,5 +1,13 @@
 <h1>All Shelters</h1>
 
 <% @shelters.each do |shelter| %>
-  <%= shelter.name %>
+  <p><%= shelter.name %></p>
 <% end %>
+
+<div id="pending">
+      <h3>Shelters with Pending Applications:</h3>
+
+      <% @pending_shelters.each do |shelter| %>
+        <li><%= shelter.name %></li>
+      <% end %>
+</div>

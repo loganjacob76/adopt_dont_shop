@@ -24,7 +24,7 @@ RSpec.describe 'admin shelter index' do
         visit '/admin/shelters'
 
         within 'div#pending' do
-            expect(page).to have_content(@shelter.name)
+            expect(page).to have_content(@shelter1.name)
             expect(page).to_not have_content(@shelter2.name)
         end
     end
