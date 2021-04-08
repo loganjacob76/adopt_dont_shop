@@ -23,11 +23,14 @@
             <%= f.text_field :pet_name, required: true %>
             <%= f.submit 'Submit' %>
         <% end %>
-
-        <% if @pet %>
-            <%= @pet.name %>
-            <%= button_to 'Adopt this Pet', "/applicants/#{@applicant.id}", method: :patch, params: {pet_id: @pet.id} %>
-        <% end %>
+        <div id="potential_pets">
+            <% if @pets %>
+                <% @pets.each do |pet| %>
+                    <%= pet.name %>
+                    <%= button_to 'Adopt this Pet', "/applicants/#{@applicant.id}", method: :patch, params: {pet_id: pet.id} %>
+                <% end %>
+            <% end %>
+        </div>
     </div>
 <% end %>
 

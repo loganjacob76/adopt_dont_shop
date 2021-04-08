@@ -39,15 +39,18 @@ RSpec.describe 'applicants show page' do
         expect(page).to have_link(href: "/pets/#{@pet2.id}")
     end
 
-    describe 'when application is not yet submitted you can add pets by name' do
+    describe 'when application is not yet submitted you can add new pets by name' do
         it 'search for pet by name' do
             visit "/applicants/#{@john.id}"
 
-            fill_in :name, with: 'Peter Barker'
+            fill_in :name, with: 'B'
             click_button 'Submit'
 
             expect(current_path).to eq("/applicants/#{@john.id}")
-            expect(page).to have_content(@pet3.name)
+            within "div#potential_pets" do
+                expect(page).to_not have_content(@pet2.name)
+                expect(page).to have_content(@pet3.name)
+            end
         end
 
         it 'returns flash error if no pets match search' do
@@ -58,7 +61,7 @@ RSpec.describe 'applicants show page' do
 
             expect(current_path).to eq("/applicants/#{@john.id}")
             expect(page).to_not have_content(@pet3.name)
-            expect(page).to have_content("Pet with name 'Pete Barker' not found.")
+            expect(page).to have_content("New pet with name 'Pete Barker' not found.")
         end
 
         it 'has button to add pet' do

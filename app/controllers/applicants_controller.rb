@@ -7,9 +7,14 @@ class ApplicantsController < ApplicationController
         @applicant = Applicant.find(params[:id])
         
         if params[:pet_name]
-            @pet = Pet.find_by(name: params[:pet_name]) if params[:pet_name]
+            @pets = []
+            potential_pets = Pet.search(params[:pet_name]) if params[:pet_name]
             
-            flash[:error] = "Pet with name '#{params[:pet_name]}' not found." if @pet.nil?
+            potential_pets.each do |pet|
+                @pets << pet if !@applicant.pets.include?(pet)
+            end
+
+            flash[:error] = "New pet with name '#{params[:pet_name]}' not found." if @pets == []
         end
     end
 

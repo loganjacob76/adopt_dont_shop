@@ -17,6 +17,7 @@ shelter2 = Shelter.create!(foster_program: false, name: 'Pets R Us', city: 'Tamp
 pet1 = shelter1.pets.create!(adoptable: true, age: 1, breed: 'Labrador', name: 'Star')
 pet2 = shelter1.pets.create!(adoptable: false, age: 4, breed: 'Mutt', name: 'Boo')
 pet3 = shelter2.pets.create!(adoptable: true, age: 2, breed: 'Bulldog', name: 'Zeke')
+pet4 = shelter2.pets.create!(adoptable: true, age: 3, breed: 'Great Dane', name: 'Benny')
 
 vet_office1 = VeterinaryOffice.create!(boarding_services: false, max_patient_capacity: 8, name: 'Fur Clinic')
 vet_office2 = VeterinaryOffice.create!(boarding_services: true, max_patient_capacity: 20, name: 'Pet Doctors')
