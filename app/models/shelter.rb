@@ -35,4 +35,12 @@ class Shelter < ApplicationRecord
   def self.reverse_alphabetical
     find_by_sql("select * from shelters order by name desc;")
   end
+
+  def self.pending_shelters
+    pending_pets = Pet.joins(:adoption_applications)
+
+    pending_pets.map do |pet|
+      pet.shelter 
+    end.uniq
+  end
 end
