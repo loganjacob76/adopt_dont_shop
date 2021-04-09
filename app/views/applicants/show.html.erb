@@ -33,5 +33,10 @@
 <p id='status'>Application Status: <%= @applicant.status %></p> <br>
 
 <% if @applicant.pets.count > 0 && @applicant.status == 'In Progress' %>
-    <%= button_to 'Submit Application', "/applicants/#{@applicant.id}/submit", method: :patch %>
+    <%= form_with url: "/applicants/#{@applicant.id}/submit", method: :patch do |f| %>
+        <%= f.label :personal_statement %> <br>
+        <%= f.text_area :personal_statement %> <br>
+        <%= f.submit 'Submit Application' %>
+    <% end %>
+    <%# <%= button_to 'Submit Application', "/applicants/#{@applicant.id}/submit", method: :patch %>
 <% end %>

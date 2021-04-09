@@ -41,7 +41,11 @@ class ApplicantsController < ApplicationController
 
     def submit
         applicant = Applicant.find(params[:id])
-        applicant.update!(status: 'Pending')
+        if params[:personal_statement] == ''
+            applicant.update!(status: 'Pending')
+        else
+            applicant.update!(status: 'Pending', personal_statement: params[:personal_statement])
+        end
 
         redirect_to "/applicants/#{applicant.id}"
     end
