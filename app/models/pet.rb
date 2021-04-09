@@ -13,8 +13,7 @@ class Pet < ApplicationRecord
     where(adoptable: true)
   end
 
-  def application_status(applicant)
-    adoption_applications.where(applicant_id: applicant.id)
-    .first.application_status
+  def adoption_application_status(applicant)
+    AdoptionApplication.find_by(applicant_id: applicant.id, pet_id: self.id).application_status
   end
 end

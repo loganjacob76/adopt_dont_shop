@@ -12,19 +12,23 @@
 <p><h3>Desired Pets:</h3><br>
     <% @applicant.pets.each do |pet| %>
         <div id="<%= pet.name %>">
+        <% if pet.adoption_application_status(@applicant) == 'N/A' %>
             <%= link_to pet.name, "/pets/#{pet.id}" %>
             <%= render partial: "button",  locals: {
                 path: "/admin/applicants/#{@applicant.id}", 
                 text: 'Approve Application', 
-                params: {application_status: 'Approved'} 
+                params: {application_status: 'Approved', pet_id: pet.id} 
                 } %>
             <%= render partial: "button",  locals: {
                 path: "/admin/applicants/#{@applicant.id}", 
                 text: 'Reject Application', 
-                params: {application_status: 'Rejected'} 
+                params: {application_status: 'Rejected', pet_id: pet.id} 
                 } %>
+        <% else %>
+          <p><%= link_to pet.name, "/pets/#{pet.id}" %> Status: <%= pet.adoption_application_status(@applicant) %></p>
+        <% end %>
         </div>
-    <% end %>
+    <% end if @applicant.status != 'In Progress' %>
 </p>
 
 <p id='status'>Application Status: <%= @applicant.status %></p> 

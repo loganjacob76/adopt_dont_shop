@@ -4,6 +4,11 @@ class AdminApplicantsController < ApplicationController
     end
     
     def update
-        binding.pry
+        applicant = Applicant.find(params[:id])
+        pet = Pet.find(params[:pet_id])        
+        application = AdoptionApplication.find_by(applicant: applicant, pet: pet)
+        
+        application.update!(application_status: params[:application_status])
+        redirect_to "/admin/applicants/#{applicant.id}"
     end
 end
