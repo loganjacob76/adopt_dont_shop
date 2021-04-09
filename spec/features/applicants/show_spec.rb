@@ -94,11 +94,29 @@ RSpec.describe 'applicants show page' do
         it 'once it is submitted it shows all desired pets and no more can be added' do
             visit "/applicants/#{@john.id}"
 
+            fill_in :personal_statement, with: 'This is the new personal statement'
             click_button 'Submit Application'
 
             expect(current_path).to eq("/applicants/#{@john.id}")
             expect(page).to have_content(@pet1.name)
             expect(page).to have_content(@pet2.name)
+            expect(page).to_not have_content(@john.personal_statement)
+            expect(page).to have_content('This is the new personal statement')
+            expect(page).to_not have_button('Submit Application')
+            within '#status' do
+                expect(page).to have_content('Application Status: Pending')
+            end
+        end
+
+        it 'once it is submitted it shows all desired pets and no more can be added' do
+            visit "/applicants/#{@john.id}"
+
+            click_button 'Submit Application'
+
+            expect(current_path).to eq("/applicants/#{@john.id}")
+            expect(page).to have_content(@pet1.name)
+            expect(page).to have_content(@pet2.name)
+            expect(page).to have_content(@john.personal_statement)
             expect(page).to_not have_button('Submit Application')
             within '#status' do
                 expect(page).to have_content('Application Status: Pending')
