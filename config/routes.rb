@@ -45,4 +45,7 @@ Rails.application.routes.draw do
   patch '/applicants/:id/submit', to: 'applicants#submit'
 
   get '/admin/shelters', to: 'admin_shelters#index'
+
+  get '/admin/applicants/:id', to: 'admin_applicants#show'
+  patch '/admin/applicants/:id', to: 'admin_applicants#update'
 end
